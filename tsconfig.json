@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "declaration": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "alwaysStrict": true,
+    "skipDefaultLibCheck": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "types": ["node"],
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./node_modules/**"]
+}
