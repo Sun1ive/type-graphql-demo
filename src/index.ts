@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import 'reflect-metadata';
-import { Query, Resolver, buildSchema } from 'type-graphql';
+import { buildSchema, Query, Resolver } from 'type-graphql';
 
 @Resolver()
 class Hello {
@@ -20,7 +20,8 @@ const createServer = async () => {
 
   const apolloServer = new ApolloServer({
     schema,
-    tracing: true
+    tracing: true,
+    cacheControl: true
   });
 
   const app = express();
