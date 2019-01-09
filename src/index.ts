@@ -2,7 +2,9 @@ require('dotenv').config();
 
 import 'reflect-metadata';
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
+import cors from 'cors';
+import morgan from 'morgan';
+import { ApolloServer, ApolloError } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { ResgisterResolver } from './modules/user/Register';
@@ -16,19 +18,30 @@ const createServer = async () => {
 
     const apolloServer = new ApolloServer({
       schema,
-      tracing: true,
-      cacheControl: true
+      formatError(error: ApolloError) {
+        console.log(error);
+
+        return error;
+      }
     });
 
     const app = express();
 
+    app.use(cors()).use(morgan('dev'));
+
     apolloServer.applyMiddleware({ app });
 
     await createConnection({
-      type: 'mongodb',
+      type: 'postgres',
       logging: true,
-      useNewUrlParser: true,
-      url: process.env.DB_URL,
+      synchronize: true,
+      name: 'default',
+      database: process.env.DB_NAME,
+      host: process.env.DB_HOST,
+      password: process.env.DB_PASSWORD,
+      username: process.env.DB_USER,
+      ssl: true,
+      port: 5432,
       entities: ['src/entity/*.*']
     });
 

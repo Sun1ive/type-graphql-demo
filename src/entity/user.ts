@@ -1,17 +1,12 @@
-import { ObjectID } from 'mongodb';
-import { Entity, ObjectIdColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, Column, BaseEntity, PrimaryColumn } from 'typeorm';
 import { Field, ObjectType, ID } from 'type-graphql';
-
-ObjectID.prototype.valueOf = function() {
-  return this.toString();
-};
 
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
   @Field(() => ID)
-  @ObjectIdColumn()
-  id: ObjectID;
+  @PrimaryColumn()
+  id: string;
 
   @Field()
   @Column('text', { unique: true })
