@@ -1,16 +1,17 @@
 require('dotenv').config();
 
-import { ApolloServer } from 'apollo-server-express';
-import express from 'express';
 import 'reflect-metadata';
+import express from 'express';
+import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { ResgisterResolver } from './modules/user/Register';
+import { LoginResolver } from './modules/user/Login';
 
 const createServer = async () => {
   try {
     const schema = await buildSchema({
-      resolvers: [ResgisterResolver]
+      resolvers: [ResgisterResolver, LoginResolver]
     });
 
     const apolloServer = new ApolloServer({

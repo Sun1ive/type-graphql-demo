@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-// import { getMongoManager } from 'typeorm';
 import { Resolver, Query, Mutation, Arg } from 'type-graphql';
 import { User } from '../../entity/User';
 
