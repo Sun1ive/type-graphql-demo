@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import 'reflect-metadata';
@@ -46,7 +48,7 @@ const createServer = async () => {
   createConnection({
     type: 'mongodb',
     useNewUrlParser: true,
-    url: 'mongodb://Sunlive:d1abl0@ds145263.mlab.com:45263/demo-typeorm',
+    url: process.env.DB_URL,
     poolSize: 12,
     entities: ['src/entity/*.ts']
   })

@@ -5,6 +5,7 @@
     "trailing-comma": false,
     "member-access": false,
     "no-console": false,
+    "no-var-requires": false,
     "arrow-parens": false,
     "object-literal-sort-keys": false,
     "max-classes-per-file": false,
