@@ -13,6 +13,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "alwaysStrict": true,
+    "strictPropertyInitialization": false,
     "skipDefaultLibCheck": true,
     "noUnusedLocals": true,
     "removeComments": true,
