@@ -2,6 +2,7 @@ import { compareSync } from 'bcrypt';
 import { Resolver, Mutation, Arg, Query } from 'type-graphql';
 import { User } from '../../entity/User';
 import { ApolloError } from 'apollo-server-core';
+import { RegisterArgs } from './Register/RegisterArgs';
 
 @Resolver(User)
 export class LoginResolver {
@@ -11,10 +12,7 @@ export class LoginResolver {
   }
 
   @Mutation(() => User)
-  async login(
-    @Arg('email') email: string,
-    @Arg('password') password: string
-  ): Promise<User> {
+  async login(@Arg('data') { email, password }: RegisterArgs): Promise<User> {
     const user = await User.findOne({
       where: {
         email
