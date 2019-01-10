@@ -5,7 +5,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
-import { buildSchema } from 'type-graphql';
+import { buildSchema, formatArgumentValidationError } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { ResgisterResolver } from './modules/user/Register';
 import { LoginResolver } from './modules/user/Login';
@@ -21,7 +21,7 @@ const createServer = async () => {
       formatError(error: ApolloError) {
         console.log(error);
 
-        return error;
+        return formatArgumentValidationError(error);
       }
     });
 

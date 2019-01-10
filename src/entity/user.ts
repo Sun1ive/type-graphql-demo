@@ -5,7 +5,7 @@ import { Field, ObjectType, ID } from 'type-graphql';
 @Entity()
 export class User extends BaseEntity {
   @Field(() => ID)
-  @PrimaryColumn()
+  @PrimaryColumn('varchar', { unique: true })
   id: string;
 
   @Field()
