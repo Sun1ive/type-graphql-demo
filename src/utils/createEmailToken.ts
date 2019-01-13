@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+
 export const createConfirmationToken = () => {
   const token = v4();
 

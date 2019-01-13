@@ -9,5 +9,8 @@ export class LoggedUser {
   email: string;
 
   @Field()
+  refreshToken: string;
+
+  @Field()
   token: string;
 }
