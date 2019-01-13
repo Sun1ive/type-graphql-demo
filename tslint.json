@@ -9,7 +9,8 @@
     "arrow-parens": false,
     "object-literal-sort-keys": false,
     "max-classes-per-file": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "max-line-length": true
   },
   "linterOptions": {
     "exclude": ["node_modules/*"]
