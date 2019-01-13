@@ -4,14 +4,18 @@ import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import jwtMiddleware from 'express-jwt';
 import { ApolloServer, ApolloError } from 'apollo-server-express';
 import { buildSchema, formatArgumentValidationError } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { ResgisterResolver } from './modules/user/Register';
 import { LoginResolver } from './modules/user/Login';
+import { IContext } from './types/Context';
 
 const createServer = async () => {
   try {
+    const app = express();
+
     const schema = await buildSchema({
       resolvers: [ResgisterResolver, LoginResolver]
     });
@@ -22,12 +26,27 @@ const createServer = async () => {
         console.log(error);
 
         return formatArgumentValidationError(error);
+      },
+      context: ({ req }: IContext) => {
+        const context = {
+          req,
+          user: req.user
+        };
+
+        return context;
       }
     });
 
-    const app = express();
-
-    app.use(cors()).use(morgan('dev'));
+    app
+      .use(cors())
+      .use(morgan('dev'))
+      .use(
+        '/graphql',
+        jwtMiddleware({
+          secret: process.env.JWT_SECRET!,
+          credentialsRequired: false
+        })
+      );
 
     apolloServer.applyMiddleware({ app });
 

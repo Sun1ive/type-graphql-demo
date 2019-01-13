@@ -3,18 +3,20 @@ import { Field, ObjectType, ID } from 'type-graphql';
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class Token extends BaseEntity {
   @Field(() => ID)
   @PrimaryColumn('varchar', { unique: true })
   id: string;
 
   @Field()
-  @Column('text', { unique: true })
-  email: string;
+  @Column('varchar', { unique: true })
+  userId: string;
 
-  @Column()
-  password: string;
+  @Field()
+  @Column('varchar', { unique: true })
+  refreshToken: string;
 
-  @Column('bool', { default: false })
-  confirmed: boolean;
+  @Field()
+  @Column('varchar', { unique: true })
+  token: string;
 }
